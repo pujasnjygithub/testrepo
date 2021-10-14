@@ -32,13 +32,13 @@ jobs:
       run: dotnet build -c release
     
     - name: docker build
-      run: docker build -t githubactions-aks-demo:'${{github.sha}}' .
+      run: docker build -t cicd-test:1.0 .
     
     - name: docker login
       run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
       
     - name: tag docker image
-      run: docker tag githubactions-aks-demo:'${{github.sha}}' '${{secrets.DOCKER_LOGIN}}'/githubactions-aks-demo:'${{github.sha}}'
+      run: docker tag cicd-test:1.0 '${{secrets.DOCKER_LOGIN}}'/cicd-test:1.0
     
     - name: push docker image
       run: docker push '${{secrets.DOCKER_LOGIN}}'/cicd-test:'${{github.sha}}'
